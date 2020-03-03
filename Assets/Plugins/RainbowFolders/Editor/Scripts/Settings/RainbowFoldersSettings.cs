@@ -28,7 +28,7 @@ namespace Borodar.RainbowFolders.Editor.Settings
     public class RainbowFoldersSettings : ScriptableObject
     {
         private const string RELATIVE_PATH = "Editor/Data/RainbowFoldersSettings.asset";
-        private const string DEVEL_PATH = "Assets/Devel/Editor/Data/RainbowFoldersSettings.asset";
+        private const string DEVEL_PATH = "Assets/CustomFolder/Editor/Data/RainbowFoldersSettings.asset";
 
         public List<RainbowFolder> Folders;
 
@@ -44,12 +44,13 @@ namespace Borodar.RainbowFolders.Editor.Settings
             get
             {
                 if (_instance == null)
-                    #if RAINBOW_FOLDERS_DEVEL
-                        _instance = AssetDatabase.LoadAssetAtPath<RainbowFoldersSettings>(DEVEL_PATH);
-                    #else
+#if RAINBOW_FOLDERS_DEVEL
+                    _instance = AssetDatabase.LoadAssetAtPath<RainbowFoldersSettings>(DEVEL_PATH);
+                if (!_instance)
+                    _instance = RainbowFoldersEditorUtility.LoadFromAsset<RainbowFoldersSettings>(RELATIVE_PATH);
+#else
                         _instance = RainbowFoldersEditorUtility.LoadFromAsset<RainbowFoldersSettings>(RELATIVE_PATH);
-                    #endif
-
+#endif
                 return _instance;
             }
         }
@@ -91,6 +92,7 @@ namespace Borodar.RainbowFolders.Editor.Settings
                         {
                             if (folder.Key.Equals(folderName)) return folder;
                         }
+
                         break;
                     case KeyType.Path:
                         if (allowRecursive && folder.IsRecursive)
@@ -101,6 +103,7 @@ namespace Borodar.RainbowFolders.Editor.Settings
                         {
                             if (folder.Key.Equals(folderPath)) return folder;
                         }
+
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

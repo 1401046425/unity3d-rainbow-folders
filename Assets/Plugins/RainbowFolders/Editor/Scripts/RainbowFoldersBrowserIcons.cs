@@ -161,7 +161,7 @@ namespace Borodar.RainbowFolders.Editor
                 _isCollabEnabled = () => false;
 
                 #if RAINBOW_FOLDERS_DEVEL
-                    Debug.LogException(ex);
+                    Debug.LogWarning(ex);
                 #endif
             }
         }

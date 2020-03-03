@@ -83,7 +83,7 @@ namespace Borodar.RainbowFolders.Editor
 
             // Background
 
-            var borderColor = EditorGUIUtility.isProSkin ? new Color(0.13f, 0.13f, 0.13f) : new Color(0.51f, 0.51f, 0.51f);           
+            var borderColor = EditorGUIUtility.isProSkin ? new Color(0.13f, 0.13f, 0.13f) : new Color(0.51f, 0.51f, 0.51f);
             EditorGUI.DrawRect(WINDOW_RECT, borderColor);
 
             var backgroundColor = EditorGUIUtility.isProSkin ? new Color(0.18f, 0.18f, 0.18f) : new Color(0.83f, 0.83f, 0.83f);
@@ -99,11 +99,11 @@ namespace Borodar.RainbowFolders.Editor
             _currentFolder.Type = (KeyType)EditorGUI.EnumPopup(rect, _currentFolder.Type);
 
             rect.y += LINE_HEIGHT + SPACING;
-            EditorGUI.LabelField(rect, "Recursive");
+            EditorGUI.LabelField(rect, "同步子文件夹图标");
             rect.y += LINE_HEIGHT + SPACING;
-            EditorGUI.LabelField(rect, "Small Icon");
+            EditorGUI.LabelField(rect, "小图标");
             rect.y += LINE_HEIGHT + SPACING;
-            EditorGUI.LabelField(rect, "Large Icon");
+            EditorGUI.LabelField(rect, "大图标");
 
             // Values
 
@@ -171,7 +171,7 @@ namespace Borodar.RainbowFolders.Editor
         private void ButtonSettings(Rect rect)
         {
             var icon = RainbowFoldersEditorUtility.GetSettingsButtonIcon();
-            if (!GUI.Button(rect, new GUIContent(icon, "Settings"), GUIStyle.none)) return;
+            if (!GUI.Button(rect, new GUIContent(icon, "设置"), GUIStyle.none)) return;
             Selection.activeObject = _settings;
             Close();
         }
@@ -179,7 +179,7 @@ namespace Borodar.RainbowFolders.Editor
         private void ButtonPresets(Rect rect)
         {
             var icon = RainbowFoldersEditorUtility.GetPresetsButtonIcon();
-            if (!GUI.Button(rect, new GUIContent(icon, "Presets"), GUIStyle.none)) return;
+            if (!GUI.Button(rect, new GUIContent(icon, "预设"), GUIStyle.none)) return;
 
             RainbowFoldersPresetsMenu.ShowDropDown(rect, _currentFolder);
         }
@@ -187,7 +187,7 @@ namespace Borodar.RainbowFolders.Editor
         private void ButtonDefault(Rect rect)
         {
             var icon = RainbowFoldersEditorUtility.GetDeleteButtonIcon();
-            if (!GUI.Button(rect, new GUIContent(icon, "Revert to Default"), GUIStyle.none)) return;
+            if (!GUI.Button(rect, new GUIContent(icon, "设置为默认图标"), GUIStyle.none)) return;
             _currentFolder.IsRecursive = false;
             _currentFolder.SmallIcon = null;
             _currentFolder.LargeIcon = null;
@@ -195,13 +195,13 @@ namespace Borodar.RainbowFolders.Editor
 
         private void ButtonCancel(Rect rect)
         {
-            if (!GUI.Button(rect, "Cancel")) return;
+            if (!GUI.Button(rect, "取消")) return;
             Close();
         }
 
         private void ButtonApply(Rect rect)
         {
-            if (!GUI.Button(rect, "Apply")) return;
+            if (!GUI.Button(rect, "应用")) return;
 
             for (var i = 0; i < _existingFolders.Length; i++)
             {
